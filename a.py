@@ -1,21 +1,42 @@
 import time
+import timeit
 import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-
-# Navigate to the application home page
 sitios = ["http://www.google.com","https://www.facebook.com/","https://stackoverflow.com/","https://www.w3schools.com/"]
-for i in sitios:
-	# create a new Firefox session
-	driver = webdriver.Chrome("C:/Users/S T E V E N/AppData/Local/Programs/Python/Python37-32/chromedriver.exe")
+
+
+def createSession():
+	driver = webdriver.Chrome("/home/steven/Documents/GestorCapture/chromedriver")
 	driver.maximize_window()
-	print(str(i))	
+	return driver
+
+def managmentBrowser(driver, url, i):
+	print(str(url))
 	driver.implicitly_wait(100)
-	driver.get(str(i))
-	time.sleep(300)
+	driver.get(str(url))
+	trafficStartCapture(i)
+	time.sleep(30)
 	driver.implicitly_wait(100)
-	# close the browser window
 	driver.quit()
 
+def execution():
+	for i in range(len(sitios)):
+		driver = createSession()
+		managmentBrowser(driver, sitios[i], i)
 
+	
+	
+def trafficStartCapture(i):
+	print(i)
+	cmd = "sudo tshark -a duration:30 -w - > /home/steven/Documents/GestorCapture/-Miner_Detector/CAPTURAS/{}.pcap".format(i)
+	os.system(cmd)
+
+
+	
+
+
+
+if __name__ == '__main__':
+	execution()    
