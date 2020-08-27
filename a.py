@@ -4,8 +4,17 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-sitios = ["http://www.google.com","https://www.facebook.com/","https://stackoverflow.com/","https://www.w3schools.com/"]
 
+def readArchive():
+	archive = open("url_benignas.txt" , "r")
+	print(archive)
+	j = 0
+	for i in archive.readlines():
+		driver = createSession()
+		managmentBrowser(driver, i, j)
+		j+=1
+		
+		
 
 def createSession():
 	driver = webdriver.Chrome("/home/steven/Documents/GestorCapture/chromedriver")
@@ -22,9 +31,8 @@ def managmentBrowser(driver, url, i):
 	driver.quit()
 
 def execution():
-	for i in range(len(sitios)):
-		driver = createSession()
-		managmentBrowser(driver, sitios[i], i)
+	readArchive();
+	
 
 	
 	
@@ -34,9 +42,8 @@ def trafficStartCapture(i):
 	os.system(cmd)
 
 
-	
-
-
 
 if __name__ == '__main__':
-	execution()    
+	execution()
+	
+
