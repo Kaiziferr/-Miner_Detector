@@ -1,49 +1,33 @@
-import time
-import timeit
+import requests
 import os
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+import csv
+
+URL = 'https://www.virustotal.com/vtapi/v2/url/scan'
+url = 'https://www.virustotal.com/vtapi/v2/url/report'
+
+def urlScan(params):
+	requests.post(URL, data=params)
+
+def getReport(params):
+	response = requests.get(url, params=params)
+	return response.json()
 
 
-def readArchive():
-	archive = open("url_benignas.txt" , "r")
-	print(archive)
-	j = 0
-	for i in archive.readlines():
-		driver = createSession()
-		managmentBrowser(driver, i, j)
-		j+=1
-		
-		
-
-def createSession():
-	driver = webdriver.Chrome("/home/steven/Documents/GestorCapture/chromedriver")
-	driver.maximize_window()
-	return driver
-
-def managmentBrowser(driver, url, i):
-	print(str(url))
-	driver.implicitly_wait(100)
-	driver.get(str(url))
-	trafficStartCapture(i)
-	time.sleep(30)
-	driver.implicitly_wait(100)
-	driver.quit()
+def managementResponse(file):
+	print(file)
+	
 
 def execution():
-	readArchive();
-	
+	#params = {'apikey': 'eff112509d99ba0ef88682356a0c1f134cb973310a6d3512e9ff13a04437b3f5', 'url':'https://crypto-loot.org/'}
+	#params2 = {'apikey': 'eff112509d99ba0ef88682356a0c1f134cb973310a6d3512e9ff13a04437b3f5', 'resource':'bed5db125302663b090d4dcf170873a5ff60bbe44d72e451801497751e5a78df-1598663151'}
+	#urlScan(params)
+	#response = getReport(params2)
 
-	
-	
-def trafficStartCapture(i):
-	print(i)
-	cmd = "sudo tshark -a duration:30 -w - > /home/steven/Documents/GestorCapture/-Miner_Detector/CAPTURAS/{}.pcap".format(i)
-	os.system(cmd)
+def maliFile():
+	print("hola")
+
 
 
 
 if __name__ == '__main__':
-	execution()
-	
-
+	maliFile()
