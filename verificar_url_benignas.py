@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 def readArchive():
-	archive = open("url_benignas.txt","r")
+	archive = open("/home/steven/Documents/GestorCapture/s/data_status/UrlActivas.txt","r")
 	for i in archive.readlines():
 		driver = createSession()
 		managmentBrowser(i, driver)
