@@ -5,9 +5,9 @@ from selenium.webdriver.common.keys import Keys
 
 
 def readArchive():
-	archive = open("./Entrenamiento/urlBenignas.txt" , "r")
+	archive = open("./Entrenamiento/data0.txt" , "r")
 	print(archive)
-	j = 0
+	j = 434
 	for i in archive.readlines():
 		try:
 			driver = createSession()
@@ -29,7 +29,7 @@ def createSession():
 def managmentBrowser(driver, url, i):
 	print(str(url))
 	driver.implicitly_wait(100)
-	driver.get(str(url))
+	driver.get('https://'+str(url))
 	trafficStartCapture(i)
 	time.sleep(30)
 	driver.implicitly_wait(100)
