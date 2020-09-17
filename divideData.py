@@ -1,10 +1,17 @@
+import random
+data = []
+
 def fileRead():
     file = open("moderna_procesada.txt","r")
     j = 0
     x = 0
     for i in file.readlines():
         i = i.replace('\n','')
-        if j % 500 == 0 and j!=0:
+        data.append(i)
+    random.shuffle(data)
+
+    for i in data:
+        if j % 1000 == 0 and j!=0:
             x = x+1
             print(f"/----- file{x}finish -----/")
         file_save = open(f"data{x}.txt",'a')
