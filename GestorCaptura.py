@@ -5,25 +5,31 @@ from selenium.webdriver.common.keys import Keys
 
 
 def readArchive():
-	archive = open("url_be.txt" , "r")
+	archive = open("./Entrenamiento/data0.txt" , "r")
 	print(archive)
-	j = 0
+	j = 434
 	for i in archive.readlines():
-		driver = createSession()
-		managmentBrowser(driver, i, j)
-		j+=1
+		try:
+			driver = createSession()
+			managmentBrowser(driver, i, j)
+			j+=1
+		except:
+			archive = open("./Entrenamiento/noEscaneada.txt" , "a")
+			archive.write(i)
+			pass
+	
 		
 		
 
 def createSession():
-	driver = webdriver.Chrome("/home/steven/Documents/GestorCapture/chromedriver")
+	driver = webdriver.Chrome("./chromedriver")
 	driver.maximize_window()
 	return driver
 
 def managmentBrowser(driver, url, i):
 	print(str(url))
 	driver.implicitly_wait(100)
-	driver.get(str(url))
+	driver.get('https://'+str(url))
 	trafficStartCapture(i)
 	time.sleep(30)
 	driver.implicitly_wait(100)
@@ -37,7 +43,7 @@ def execution():
 	
 def trafficStartCapture(i):
 	print(i)
-	cmd = "sudo tshark -a duration:30 -w - > /home/steven/Documents/GestorCapture/-Miner_Detector/CAPTURAS/{}.pcap".format(i)
+	cmd = "sudo tshark -i enp1s0 -a duration:300 -w - > /home/steven/Documents/GestorCapture/s/Entrenamiento/{}.pcap".format(i)
 	os.system(cmd)
 
 

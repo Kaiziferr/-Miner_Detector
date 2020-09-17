@@ -5,7 +5,7 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
 def fileRead():
-    file = open('test.txt',"r")
+    file = open('/home/steven/Documents/GestorCapture/s/data/data1.txt',"r")
     for i in file.readlines():
         i = i.replace('\n','')
         checkUrl(i)
@@ -22,15 +22,15 @@ def checkUrl(url):
         pass
 
     if status == 200:
-        file = open("UrlActivas.txt","a")
+        file = open("/home/steven/Documents/GestorCapture/s/data_status/UrlActivas.txt","a")
         file.write(str(url)+"\n")
         file.close()
     elif status == 0:
-        file = open("UrlnoEscaneadas.txt","a")
+        file = open("/home/steven/Documents/GestorCapture/s/data_status/UrlnoEscaneadas.txt","a")
         file.write(str(url)+"\n")
         file.close()
     else:
-        file = open("UrlInactivas.txt","a")
+        file = open("/home/steven/Documents/GestorCapture/s/data_status/UrlInactivas.txt","a")
         file.write(str(url)+"\n")
         file.close()
 
