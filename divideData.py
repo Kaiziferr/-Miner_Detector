@@ -1,6 +1,7 @@
 import random
 data = []
 
+#Divide un archivo de url de forma random, en diferentes archivos
 def fileRead():
     file = open("moderna_procesada.txt","r")
     j = 0

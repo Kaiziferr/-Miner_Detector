@@ -3,7 +3,7 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-
+#Lee los archivo
 def readArchive():
 	archive = open("./Entrenamiento/data0.txt" , "r")
 	print(archive)
@@ -20,12 +20,13 @@ def readArchive():
 	
 		
 		
-
+#Ejecuta el navegador
 def createSession():
 	driver = webdriver.Chrome("./chromedriver")
 	driver.maximize_window()
 	return driver
 
+#Manipula los parametros como el tiempo de ejecución
 def managmentBrowser(driver, url, i):
 	print(str(url))
 	driver.implicitly_wait(100)
@@ -40,7 +41,7 @@ def execution():
 	
 
 	
-	
+#Ejecuta el tshark	
 def trafficStartCapture(i):
 	print(i)
 	cmd = "sudo tshark -i enp1s0 -a duration:300 -w - > /home/steven/Documents/GestorCapture/s/Entrenamiento/{}.pcap".format(i)

@@ -4,13 +4,14 @@ import time
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
+#Lee el archivo
 def fileRead():
     file = open('/home/steven/Documents/GestorCapture/s/data/data1.txt',"r")
     for i in file.readlines():
         i = i.replace('\n','')
         checkUrl(i)
         
-
+#Verifica el estatus del sitio web
 def checkUrl(url):
     status = 0
     try:

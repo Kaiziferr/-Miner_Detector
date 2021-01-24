@@ -9,6 +9,7 @@ URL_BENIGN = []
 FILE_BENIGN = ""
 FILE_MALIGN = ""
 
+# Lee los archivos
 def fileRead():
     file = open('/home/steven/Documents/GestorCapture/s/data_status/UrlActivas.txt',"r")
     j = 0
@@ -28,7 +29,7 @@ def fileRead():
             dataNo.close()
             pass
       
-
+#Tienes que poner tu api key de Virus Total
 def conection(url):
     params = {'apikey': 'eff112509d99ba0ef88682356a0c1f134cb973310a6d3512e9ff13a04437b3f5', 'url':'{}'.format(url)}
     response = urlScan(params)
@@ -36,16 +37,18 @@ def conection(url):
     response = getReport(params)
     urlIdentification(response)
 
+#Escanesa la url para saber si es benigna o no
 def urlScan(params):
     response = requests.post(URL_SCAN, data=params)
     print(response.json())
     return response.json()
 
+# Pides los parametros de la url
 def getReport(params):
     response = requests.get(URL_REPORT, params=params)
     return response.json()
 
-
+#Archivos para guardas
 def urlIdentification(response):
     if response['positives']>0:
         print(response['url'])
@@ -56,7 +59,7 @@ def urlIdentification(response):
         FILE_BENIGN = open("/home/steven/Documents/GestorCapture/s/data_virus_Total/urlBenignas.txt","a")
         FILE_BENIGN.write(response['url']+"\n")
         URL_BENIGN.append(str(response['url']))
-
+#Abre el archivos
 def uploadFile():
     FILE_MALIGN = open("urlMalignas.txt","r")
     FILE_BENIGN = open("urlBenignas.txt","r")
