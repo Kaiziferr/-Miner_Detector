@@ -31,9 +31,9 @@ def fileRead():
       
 #Tienes que poner tu api key de Virus Total
 def conection(url):
-    params = {'apikey': 'eff112509d99ba0ef88682356a0c1f134cb973310a6d3512e9ff13a04437b3f5', 'url':'{}'.format(url)}
+    params = {'apikey': '', 'url':'{}'.format(url)}
     response = urlScan(params)
-    params = {'apikey': 'eff112509d99ba0ef88682356a0c1f134cb973310a6d3512e9ff13a04437b3f5', 'resource':'{}'.format(response['scan_id'])}
+    params = {'apikey': '', 'resource':'{}'.format(response['scan_id'])}
     response = getReport(params)
     urlIdentification(response)
 
